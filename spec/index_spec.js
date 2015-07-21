@@ -30,6 +30,20 @@ describe('stubPromise', function() {
     expect(resolveValue).to.equal('resolve value');
   });
 
+  it('can resolve a function', function() {
+    var resolveValue;
+    promise.resolveFn(function() {
+      return 'resolve value';
+    });
+
+    promise()
+      .then(function(value) {
+        resolveValue = value;
+      });
+
+    expect(resolveValue).to.equal('resolve value');
+  });
+
   it('can resolve empty value', function() {
     promise.resolves();
 
