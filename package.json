@@ -1,7 +1,7 @@
 {
   "name": "sinon-stub-superagent-promise",
   "description": "Superagent Bluebird Promise stubbing for Sinon.JS",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "author": {
     "name": "Doron Segal",
     "email": "doron@heartistfy.com"

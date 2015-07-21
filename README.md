@@ -1,4 +1,4 @@
-# sinon-stub-superagent-bluebird-promise
+# sinon-stub-superagent-bluebird-promise V 0.0.11
 
 This package was inspired by sinon-stub-promise in order to test superagent-bluebird-promise.
 That makes testing of promises easier when stubbing with [Sinon.JS](http://sinonjs.org/). This library ensures stubbed promises are
