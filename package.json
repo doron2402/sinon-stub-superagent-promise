@@ -1,0 +1,37 @@
+{
+  "name": "sinon-stub-superagent-promise,
+  "description": "Superagent Bluebird Promise stubbing for Sinon.JS",
+  "version": "0.0.1",
+  "author": {
+    "name": "Doron Segal",
+    "email": "doron@heartistfy.com"
+  },
+  "homepage": "https://github.com/doron2402/sinon-stub-superagent-promise.git#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doron2402/sinon-stub-superagent-promise"
+  },
+  "bugs": {
+    "url": "https://github.com/doron2402/sinon-stub-superagent-promise/issues"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "main": "index.js",
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "mocha": "^2.1.0",
+    "rsvp": "^3.0.16",
+    "sinon": "^1.12.2"
+  },
+  "maintainers": [
+    {
+      "name": "doron2402",
+      "email": "doron2402@heartistfy.com"
+    }
+  ],
+  "directories": {},
+  "scripts": {
+    "test": "mocha spec"
+  }
+}
