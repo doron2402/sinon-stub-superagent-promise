@@ -9,7 +9,12 @@ function buildThenable() {
     then: function(onFulfill, onReject) {
       try {
         if (this.resolved && !this.rejected) {
-          var returned = onFulfill(this.resolveValue);
+          var returned;
+          if (this.resolveFn) {
+            returned = onFulfill(this.resolveFn());
+          } else {
+            returned = onFulfill(this.resolveValue);
+          }
 
           // promise returned, return that for next handler in chain
           if (returned && returned.then) {
@@ -71,9 +76,17 @@ function setup(sinon) {
     return this;
   }
 
+  function resolveFn(fn) {
+    this.thenable.resolved = true;
+    this.thenable.rejected = false;
+    this.thenable.resolveFn = fn;
+    return this;
+  }
+
   sinon.stub.returnsPromise = function() {
     this.resolves = resolves;
     this.rejects = rejects;
+    this.resolveFn = resolveFn;
 
     var thenable = buildThenable();
     this.thenable = thenable;
