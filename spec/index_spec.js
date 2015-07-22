@@ -30,8 +30,21 @@ describe('stubPromise', function() {
     expect(resolveValue).to.equal('resolve value');
   });
 
+  it.only('can chain catches into thens', function() {
+    promise.rejects('error');
+    promise()
+      .catch(function(e) {
+        return 'not an ' + e;
+      })
+      .then(function(val) {
+        resolveValue = val;
+      });
+
+    expect(resolveValue).to.equal('not an error');
+  });
+
   it('can resolve a function', function() {
-    var resolveValue;
+    resolveValue;
     promise.resolveFn(function() {
       return 'resolve value';
     });
