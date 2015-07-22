@@ -1,17 +1,12 @@
 function buildThenable() {
-  return {
-    set: function(opt){
-      return this;
-    },
-    use: function(obj){
-      return this;
-    },
+  var thenable = {
     then: function(onFulfill, onReject) {
       try {
         if (this.resolved && !this.rejected) {
           var returned;
           if (this.resolveFn) {
             returned = onFulfill(this.resolveFn());
+            this.resolveFn = null;
           } else {
             returned = onFulfill(this.resolveValue);
           }
@@ -44,7 +39,11 @@ function buildThenable() {
     catch: function(onReject) {
       if (this.rejected) {
         try {
-          onReject(this.rejectValue);
+          var returned = onReject(this.rejectValue);
+          this.rejected = false;
+          this.resolved = true;
+          this.resolveValue = returned;
+          this.rejectValue = null;
         } catch (e) {
           this.rejectValue = e;
         }
@@ -59,6 +58,32 @@ function buildThenable() {
       }
     }
   };
+
+  var chainableMethods = [
+    'field',
+    'attach',
+    'redirects',
+    'agent',
+    'set',
+    'unset',
+    'type',
+    'accept',
+    'query',
+    'send',
+    'buffer',
+    'timeout',
+    'clearTimeout',
+    'parse',
+    'redirect',
+    'auth',
+    'ca',
+    'use',
+    'end'
+  ];
+  chainableMethods.forEach(function(method) {
+    thenable[method] = function() { return thenable; }
+  });
+  return thenable;
 }
 
 function setup(sinon) {
